@@ -5,7 +5,7 @@
     <script type="module" src="public/Three_js_important/RGBELoader.js"></script>
     <script type="module" src="public/Three_js_important/OrbitControls.js"></script>
     <script src="public/Three_js_important/load.js" type="module"></script>
-
+    <script src="public/hashing/md5.js"></script>
     
 
 

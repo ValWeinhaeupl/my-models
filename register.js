@@ -9,9 +9,13 @@ function register(){
     username = document.getElementById('username').value;
     password = document.getElementById('password').value;
     password2 = document.getElementById('password2').value;
+    emial = document.getElementById('email').value;
+    profilepicture = document.getElementById('profilbild');
 
+
+    //in json senden für bessere wartung
 if(username.length > 3 && password == password2){
-    fetch("server.php?value=" + username + "|" + password)
+    fetch("server.php?value=" + username + "|" + password )
         .then((response) => {
             return response.json();
         })
@@ -33,6 +37,9 @@ if(username.length > 3 && password == password2){
     
 }
 
+function login(){
+
+}
 
 function logout(){
     localStorage.setItem("login", null); 

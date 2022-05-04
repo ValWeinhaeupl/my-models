@@ -11,17 +11,25 @@
     
 </head>
 <body>
+    <script>
+        
+    </script>
 <?php
         include "public/php_bausteine/header.php";
     ?>
+    <div id="logincontainer">
     <h2>Register</h2>
-    <!-- <form  action="server.php" method="post"> -->
-        <form>
-        Username<input type="text" id="username">
-        Password<input type="password" id="password">
-        Repeat Password<input type="password" id="password2">
-        
-    </form>
-    <button onclick="register()">Register</button>
+    
+        <div id="loginbox">
+        <p>Username</p><input type="text" id="username">
+        <p>Password</p><input type="password" id="password">
+        <p>Repeat Password</p><input type="password" id="password2">
+        <p>E-mail</p><input type="text" id="email">
+        <p>Profilepicture</p><input type="file" id="profilbild">
+        </div>
+    
+        <button onclick="register()">Register</button>
+    </div>
+    
 </body>
 </html>
