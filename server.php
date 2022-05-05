@@ -27,39 +27,69 @@
     $conn = new mysqli($_db_host, $_db_username, $_db_passwort, $_db_datenbank);
 
     //login
-    if(isset($_GET["value"])){
-        $value = $_GET["value"];
-        $logindata = explode("|", $value);
-        if($conn->connect_error){
-         die("Connection failed: " . $conn->connection_error);
-        }
+    
+    //profilbild
 
-            $insert = "insert into benutzer (username, password) values('" . $logindata[0] . "',md5('" . $logindata[1] ."'));";
+    if(isset($_POST["username"])){
+        echo "test";
+
+        $insert = "insert into benutzer (username, password, email) values('" . $_POST["username"] . "', md5('" . $_POST["password"] ."'), '". $_POST["email"] ."');";
+            
             $conn->query($insert);
 
-            $insertfeed = "insert into feed (username) values('" . $logindata[0] ."');";
+            $insertfeed = "insert into feed (username) values('" . $_POST["username"] ."');";
             $conn->query($insertfeed);
 
-            $getfeedno = "select FeedNr from feed where username = '" . $logindata[0] . "';";
+            $getfeedno = "select FeedNr from feed where username = '" . $_POST["username"] . "';";
             $feedno = $conn->query($getfeedno);
             $tempfeednr = null;
             while($row = $feedno->fetch_assoc()){
                 $tempfeednr = $row["FeedNr"];
             }
             
-            $insertfeedno = "update benutzer set FeedNr = " . $tempfeednr. " where username = '" . $logindata[0] . "';"; 
+            $insertfeedno = "update benutzer set FeedNr = " . $tempfeednr. " where username = '" . $_POST["username"] . "';"; 
             $conn->query($insertfeedno);
-            echo json_encode(true);
 
-         
+            $pathpb = "remotefiles/profile-pictures/" . $_POST["username"] . ".png";
+            move_uploaded_file($_FILES["profilbild"]["tmp_name"], $pathpb);
+
+            $updatepath = "update benutzer set profilepicture = '" . $pathpb . "' where username = '" . $_POST["username"] . "';";
+            $conn->query($updatepath);
+
+            echo  json_encode(true);
     }
+
+    // if(isset($_GET["register"])){
+    //     $logindata = json_decode($_GET["register"]);
+    //     if($conn->connect_error){
+    //      die("Connection failed: " . $conn->connection_error);
+    //     }
+
+    //         $insert = "insert into benutzer (username, password, email) values('" . $_POST["username"] . "', md5('" . $_POST["password"] ."'), '". json_encode($_POST["email"]) ."');";
+            
+    //         $conn->query($insert);
+
+    //         $insertfeed = "insert into feed (username) values('" . $_POST["username"] ."');";
+    //         $conn->query($insertfeed);
+
+    //         $getfeedno = "select FeedNr from feed where username = '" . $_POST["username"] . "';";
+    //         $feedno = $conn->query($getfeedno);
+    //         $tempfeednr = null;
+    //         while($row = $feedno->fetch_assoc()){
+    //             $tempfeednr = $row["FeedNr"];
+    //         }
+            
+    //         $insertfeedno = "update benutzer set FeedNr = " . $tempfeednr. " where username = '" . $_POST["username"] . "';"; 
+    //         $conn->query($insertfeedno);
+    //         echo json_encode(true);
+    // }
 
   
 
     if(isset($_GET["getposts"])){
         $data = array();
 
-        $selectposts = "select * from post";
+        $selectposts = "select * from post p inner join benutzer b on p.username = b.username";
         $resultset = $conn->query($selectposts);
 
         $temp = 0;
@@ -84,7 +114,8 @@
     if(isset($_GET["getuserposts"])){
         $data = array();
 
-        $selectposts = "select * from post where username = '" . $_GET["getuserposts"] . "'";
+        //inner join funktioniert nicht
+        $selectposts = "select * from post p inner join benutzer b on p.username = b.username where username = '" . $_GET["getuserposts"] . "'";
         $resultset = $conn->query($selectposts);
 
         $temp = 0;

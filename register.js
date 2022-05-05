@@ -9,33 +9,66 @@ function register(){
     username = document.getElementById('username').value;
     password = document.getElementById('password').value;
     password2 = document.getElementById('password2').value;
-    emial = document.getElementById('email').value;
-    profilepicture = document.getElementById('profilbild');
+    email = document.getElementById('email').value;
+    profilepicture = document.getElementById('profilbild').files[0];
 
+    let formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("email", email);
+    formData.append("profilbild", profilepicture);
 
     //in json senden für bessere wartung
+    // if(username.length > 3 && password == password2){
+    //     fetch("server.php?register=" + JSON.stringify(registerdata))
+    //         .then((response) => {
+    //             return response.json();
+    //         })
+    //         .then((data) => {
+                
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         })
+    // }else{
+    //     console.log("password fail");
+    // }
 if(username.length > 3 && password == password2){
-    fetch("server.php?value=" + username + "|" + password )
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data);
-            if(data){
-                localStorage.setItem("login", username);
-                location.href="index.php";
+fetch("server.php", {
+    method: "post",
+    body: formData,
+  })
+    .then((response) => {
+        setTimeout(() => {
+            if(response.json()){
+                let data = response;
+                console.log(data);
+                    if(data){
+                        localStorage.setItem("login", username);
+                        location.href="index.php";
+                    }else{
+                    document.getElementsByTagName("form") += "<p>Benutzer existiert bereits!</p>";
+                    }
+       location.href = "index.php";
             }else{
-                document.getElementsByTagName("form") += "<p>Benutzer existiert bereits!</p>";
+                console.log("nein");
             }
-        })
-        .catch((error) => {
-            console.error(error);
-        })
+
+        }, 3000)
+        
+      
+    })
+    .catch((error) => {
+      check = false;
+      console.error(error);
+    });
 }else{
-    console.log("password fail");
+    console.log("bruh");
 }
-    
 }
+
+
+
 
 function login(){
 

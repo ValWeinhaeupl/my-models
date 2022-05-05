@@ -35,6 +35,7 @@ function view(e) {
   // console.log(e);
   ///console.log(data.models[e]);
   document.getElementById("titel").innerHTML = dbdata[e].Name;
+  document.getElementById("pb").src = dbdata[e].profilepicture;
   document.getElementById("bigtags").innerHTML = "";
   for (let i = 0; i < dbdata[e].Tags.split(",").length; i++) {
     sessionStorage.setItem("currentpost", dbdata[e].PostNr);

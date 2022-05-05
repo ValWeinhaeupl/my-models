@@ -25,7 +25,7 @@
         <p>Password</p><input type="password" id="password">
         <p>Repeat Password</p><input type="password" id="password2">
         <p>E-mail</p><input type="text" id="email">
-        <p>Profilepicture</p><input type="file" id="profilbild">
+        <p>cock</p><input type="file" name="profilbild" id="profilbild">
         </div>
     
         <button onclick="register()">Register</button>

@@ -48,9 +48,9 @@ function upload() {
       body: formData,
     })
       .then((response) => {
-        // setTimeout(() => {
-        location.href = "index.php";
-        // }, 3000);
+        setTimeout(() => {
+          location.href = "index.php";
+        }, 3000);
       })
       .catch((error) => {
         check = false;

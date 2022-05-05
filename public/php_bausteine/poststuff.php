@@ -4,7 +4,7 @@
     <div id="bigpost">
         
         <div id="postdata">
-        <img src="public/icons/user.png">
+        <img src="public/icons/user.png" id="pb">
         <h2 id="postusername"></h2>    
         <h1 id="titel"></h1></div>
         <div id="modelandcomments">
