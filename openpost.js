@@ -36,6 +36,7 @@ function view(e) {
   ///console.log(data.models[e]);
   document.getElementById("titel").innerHTML = dbdata[e].Name;
   document.getElementById("pb").src = dbdata[e].profilepicture;
+  document.getElementById("postusername").innerHTML = dbdata[e].username;
   document.getElementById("bigtags").innerHTML = "";
   for (let i = 0; i < dbdata[e].Tags.split(",").length; i++) {
     sessionStorage.setItem("currentpost", dbdata[e].PostNr);
@@ -62,7 +63,11 @@ function view(e) {
       return response.json();
     })
     .then((data) => {
+      console.log("comments");
       console.log(data);
+      for (let i = 0; i < data.length; i++) {
+        document.getElementById("commentcontainer").innerHTML += 
+      }
     })
     .catch((error) => {
       console.error(error);

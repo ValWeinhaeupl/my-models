@@ -217,6 +217,12 @@ p {
   overflow: hidden;
 }
 
+#pb {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 100%;
+}
+
 #postdata {
   margin: 0;
   padding: 0;

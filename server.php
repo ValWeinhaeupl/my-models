@@ -103,7 +103,8 @@
                 "Beschreibung" => $row["Beschreibung"],
                 "Tags" => $row["Tags"],
                 "Likes" => $row["Likes"],
-                "ThumbPath" => $row["ThumbPath"]
+                "ThumbPath" => $row["ThumbPath"],
+                "profilepicture" => $row["profilepicture"]
             );
 
             $data[] = $tempobj;
@@ -129,7 +130,8 @@
                 "Beschreibung" => $row["Beschreibung"],
                 "Tags" => $row["Tags"],
                 "Likes" => $row["Likes"],
-                "ThumbPath" => $row["ThumbPath"]
+                "ThumbPath" => $row["ThumbPath"],
+                "profilepicture" => $row["profilepicture"]
             );
 
             $data[] = $tempobj;
