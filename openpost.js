@@ -30,13 +30,18 @@ function view(e) {
     }*/
 
   window.scrollTo(0, 0);
-  document.getElementsByTagName("body")[0].style.overflowy = "hidden";
+  document.getElementsByTagName("body")[0].style = "overflow-y:hidden";
 
   // console.log(e);
   ///console.log(data.models[e]);
   document.getElementById("titel").innerHTML = dbdata[e].Name;
   document.getElementById("pb").src = dbdata[e].profilepicture;
   document.getElementById("postusername").innerHTML = dbdata[e].username;
+  document
+    .getElementById("postusername")
+    .addEventListener("click", function () {
+      viewuser(dbdata[e].username);
+    });
   document.getElementById("bigtags").innerHTML = "";
   for (let i = 0; i < dbdata[e].Tags.split(",").length; i++) {
     sessionStorage.setItem("currentpost", dbdata[e].PostNr);
@@ -67,7 +72,9 @@ function view(e) {
       console.log(data);
       for (let i = 0; i < data.length; i++) {
         document.getElementById("commentcontainer").innerHTML +=
-          "<div id='comment'><h2>" +
+          "<div id='comment'><h2 onclick='viewuser(" +
+          JSON.stringify(data[i].username) +
+          ")'>" +
           data[i].username +
           "</h2><p>" +
           data[i].text +
@@ -88,7 +95,7 @@ function view(e) {
 function leave() {
   commentcontainer.innerHTML = "";
   currentpost = null;
-  document.getElementsByTagName("body")[0].style.overflowy = "visible";
+  document.getElementsByTagName("body")[0].style = "overflow-y:visible";
 
   post.style = " background-color: rgba(255, 255, 255, 0);";
   coverup.style.display = "none";

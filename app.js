@@ -19,6 +19,7 @@ if (!location.href.includes("user.php")) {
     .then((data) => {
       console.log(data);
       //wichtig
+
       loadposts(data);
     })
     .catch((error) => {
@@ -38,6 +39,7 @@ if (!location.href.includes("user.php")) {
     .then((data) => {
       console.log(data);
       //wichtig
+      document.getElementById("userdata").style.display = "flex";
       loadposts(data);
     })
     .catch((error) => {
@@ -108,4 +110,23 @@ function comment() {
 
   commentcontainer.innerHTML += "<p>" + commentbox.value + "</p>";
   commentbox.value = "";
+}
+
+function viewuser(user) {
+  document.getElementById("userdata").style.display = "flex";
+  console.log(user);
+  //leave();
+  fetch("server.php?getuserposts=" + user)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      //wichtig
+      leave();
+      loadposts(data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }

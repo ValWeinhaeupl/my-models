@@ -15,7 +15,7 @@
         include "public/php_bausteine/poststuff.php";
         include "public/php_bausteine/header.php";
     ?>
-    
+    <div id="userdata"><img id="profilepb"><h1 id="profileusername"></h1></div>
     <div id="container"></div>
     <?php
         include "public/php_bausteine/navbar.php";

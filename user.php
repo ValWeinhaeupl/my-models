@@ -19,6 +19,7 @@
     ?>
 
 <!-- in app.js wird loaddata aufgerufen, manipulieren -->
+<div id="userdata"><img id="profilepb"><h1 id="profileusername"></h1></div>
     <div id="container">
 
     </div>

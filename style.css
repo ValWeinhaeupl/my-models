@@ -221,6 +221,7 @@ p {
   width: 3vw;
   height: 3vw;
   border-radius: 100%;
+  border-style: solid;
 }
 
 #postdata {
@@ -244,6 +245,11 @@ p {
 #titel {
   text-align: center;
   font-family: bebas_neu;
+}
+
+#postusername:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 #hbox {
@@ -402,4 +408,30 @@ p {
 
 #login img {
   height: 5vh;
+}
+
+#userdata {
+  /* background-image: linear-gradient(
+    to bottom,
+    rgb(83, 83, 83),
+    rgba(163, 163, 163, 0.877)
+  ); */
+  background-color: rgb(128, 128, 128);
+  height: 10vh;
+  width: 100vw;
+}
+
+#userdata {
+  display: flex;
+  padding-left: 5vw;
+  align-items: center;
+  display: none;
+}
+
+#profilepb {
+  width: 5vw;
+  height: 5vw;
+  margin-right: 3vw;
+  border-radius: 100%;
+  border-style: solid;
 }

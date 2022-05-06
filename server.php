@@ -115,8 +115,8 @@
     if(isset($_GET["getuserposts"])){
         $data = array();
 
-        //inner join funktioniert nicht
-        $selectposts = "select * from post p inner join benutzer b on p.username = b.username where username = '" . $_GET["getuserposts"] . "'";
+        //inner join funktioniert
+        $selectposts = "select * from post p inner join benutzer b on p.username = b.username where p.username = '" . $_GET["getuserposts"] . "'";
         $resultset = $conn->query($selectposts);
 
         $temp = 0;

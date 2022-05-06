@@ -5,6 +5,8 @@ function loadposts(x) {
 
   console.log(dbdata);
   container.innerHTML = "";
+  document.getElementById("profilepb").src = x[0].profilepicture;
+  document.getElementById("profileusername").innerHTML = x[0].username;
   for (let i = 0; i < x.length; i++) {
     container.innerHTML +=
       '<div class="post" onclick="view(' +
