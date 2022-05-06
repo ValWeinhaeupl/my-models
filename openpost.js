@@ -66,7 +66,12 @@ function view(e) {
       console.log("comments");
       console.log(data);
       for (let i = 0; i < data.length; i++) {
-        document.getElementById("commentcontainer").innerHTML += 
+        document.getElementById("commentcontainer").innerHTML +=
+          "<div id='comment'><h2>" +
+          data[i].username +
+          "</h2><p>" +
+          data[i].text +
+          "</p></div>";
       }
     })
     .catch((error) => {
