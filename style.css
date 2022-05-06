@@ -426,11 +426,12 @@ p {
   padding-left: 5vw;
   align-items: center;
   display: none;
+  overflow: hidden;
 }
 
 #profilepb {
-  width: 5vw;
-  height: 5vw;
+  width: 4vw;
+  height: 4vw;
   margin-right: 3vw;
   border-radius: 100%;
   border-style: solid;
