@@ -108,7 +108,15 @@ function comment() {
       console.error(error);
     });
 
-  commentcontainer.innerHTML += "<p>" + commentbox.value + "</p>";
+  // commentcontainer.innerHTML += "<p>" + commentbox.value + "</p>";
+  document.getElementById("commentcontainer").innerHTML +=
+    "<div id='comment'><h2 onclick='viewuser(" +
+    JSON.stringify(localStorage.getItem("login")) +
+    ")'>" +
+    localStorage.getItem("login") +
+    "</h2><p>" +
+    commentbox.value +
+    "</p></div>";
   commentbox.value = "";
 }
 
