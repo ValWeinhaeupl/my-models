@@ -123,7 +123,19 @@ p {
   justify-content: space-between;
   border-radius: 10px;
   filter: brightness(100%);
-  transition: filter 0.7s;
+  transition: transform 1s;
+}
+
+@keyframes idle-rotation {
+  0% {
+    transform: perspective(3000px) rotateY(20deg) rotateX(-5deg);
+  }
+  50% {
+    transform: perspective(3000px) rotateY(-20deg) rotateX(5deg);
+  }
+  100% {
+    transform: perspective(3000px) rotateY(20deg) rotateX(-5deg);
+  }
 }
 
 #username {
@@ -131,8 +143,14 @@ p {
 }
 
 .post:hover {
+  animation-name: idle-rotation;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-delay: 1s;
+
   filter: brightness(50%);
   cursor: pointer;
+  transform: perspective(3000px) rotateY(20deg) rotateX(-5deg);
 }
 
 .post img {
