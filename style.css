@@ -90,11 +90,13 @@ p {
 
 #logincontainer {
   padding: 5vh 5vw 0 5vw;
+  text-align: center;
+  justify-content: center;
   width: 70vw;
   margin-left: 9.5vw;
   background-color: rgba(163, 163, 163, 0.877);
-  padding-bottom: 30vh;
-  height: auto;
+  /* padding-bottom: 30vh; */
+  height: 80vh;
 }
 
 #loginbox {
@@ -189,6 +191,11 @@ p {
   margin-right: 0.5vw;
   margin-left: 0.5vw;
   height: 2vh;
+}
+
+.tags p:hover {
+  cursor: pointer;
+  background-color: rgb(119, 119, 119);
 }
 
 /* wenn post aktiv ist, dann wird display auf block gesetzt um zugriff zu verhindern */

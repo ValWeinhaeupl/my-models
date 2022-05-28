@@ -173,27 +173,51 @@
         echo json_encode($tempdata);
     }
 
+    if(isset($_GET["login"])){
+        $data = json_decode($_GET["login"]);
+        $selectusername = "select * from benutzer where username = '" . $data->email_username . "';";
+        $rs = $conn->query($selectusername);
+        while($row = $rs->fetch_assoc()){
+            if($row["password"] == $data->password){
+                echo json_encode(true);
+            }else{
+                echo json_encode(false);
+            }
+        }
 
+        $data = json_decode($_GET["login"]);
+        $selectusername = "select * from benutzer where email = '" . $data->email_username . "';";
+        $rs = $conn->query($selectusername);
+        while($row = $rs->fetch_assoc()){
+            if($row["password"] == $data->password){
+                if(str_contains($data->email_username, "@")){
+                    $getusername = "select username from benutzer where email = '" . $data->email_username ."';";
+                    $rs = $conn->query($getusername);
+                    while($row = $rs->fetch_assoc()){
+                        echo json_encode($row["username"]);
+                    }
+                }else{
+                    echo json_encode(true);
+                }
+                
+            }else{
+                echo json_encode(false);
+            }
+        }
 
-//post files
-        //  if(isset($_GET["upload"])){
-        //     $data = json_decode($_GET["upload"]);
+        
+    }
 
-        //     $selectuserid = 'select BenutzerNr from benutzer where username = "'. $data->username .'";';
-        //     $userid = $conn->query($selectuserid);
-        //     $useridtemp = "";
-        //     if($userid->num_rows > 0){
-        //         while($row = $userid->fetch_assoc()){
-        //             $useridtemp = $row["BenutzerNr"];
-        //         }
-        //     }
-
-        //     $insertpost = "insert into post (BenutzerNr, ObjektPath, ThumbPath, Name, Beschreibung, Tags, Likes) values(". $useridtemp .", 'remotefiles/objects/1.glb', 'remotefiles/thumbnails/Unbenannt-1.png', '". $data->title ."', '". $data->description ."', '".  $data->tags ."', 0);";
-        //     $conn->query($insertpost);
-
-        //     echo json_encode(true);
-        // }
-//$conn->close();
-
+    if(isset($_GET["search"])){
+        $search = $_GET["search"];
+        $getsearchposts = "select * from post where username like '%" .  $search . "%' or name like '%" .  $search . "%' or tags like '%" . $search . "%'";
+    
+        $rs = $conn->query($getsearchposts);
+        $tempdata = [];
+        while($row = $rs->fetch_assoc()){
+            $tempdata[] = $row;
+        }
+        echo json_encode($tempdata);
+    }
 
 ?>

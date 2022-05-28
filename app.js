@@ -1,3 +1,5 @@
+var superdata;
+
 if (localStorage.getItem("login") == "null") {
   // document.getElementById("login").innerHTML = "<a href='login.php'>Login/Register</a>";
   location.href = "login.php";
@@ -18,7 +20,7 @@ if (!location.href.includes("user.php")) {
     })
     .then((data) => {
       console.log(data);
-      //wichtig
+      superdata = data;
 
       loadposts(data);
     })
@@ -39,6 +41,7 @@ if (!location.href.includes("user.php")) {
     .then((data) => {
       console.log(data);
       //wichtig
+      superdata = data;
       document.getElementById("userdata").style.display = "flex";
       loadposts(data);
     })
@@ -52,21 +55,40 @@ const fallback = container.innerHTML;
 
 function search() {
   let searchword = document.getElementById("searchbar").value;
-  let searchdata = [];
-  if (searchword != "") {
-    for (let i = 0; i < data.models.length; i++) {
-      for (let j = 0; j < data.models[i].Tags.length; j++) {
-        if (data.models[i].Tags[j].includes(searchword)) {
-          // console.log(data.models[i]);
-          searchdata.push(data.models[i]);
-          break;
-        }
-      }
-    }
-    loadposts(searchdata);
+  if (searchword.length == 0) {
+    loadposts(superdata);
+    document.getElementById("userdata").style.height = "10vh";
   } else {
-    container.innerHTML = fallback;
+    fetch("server.php?search=" + searchword)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        loadposts(data);
+        document.getElementById("userdata").style.height = "0";
+
+        leave();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
+}
+
+function searchtags(v) {
+  let searchword = v;
+
+  fetch("server.php?search=" + searchword)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      loadposts(data);
+      leave();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 //scrolleffekt

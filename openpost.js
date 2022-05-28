@@ -46,23 +46,13 @@ function view(e) {
   for (let i = 0; i < dbdata[e].Tags.split(",").length; i++) {
     sessionStorage.setItem("currentpost", dbdata[e].PostNr);
     document.getElementById("bigtags").innerHTML +=
-      "<p>" + dbdata[e].Tags.split(",")[i] + "</p>";
+      "<p onclick='searchtags(" +
+      JSON.stringify(dbdata[e].Tags) +
+      ")'>" +
+      dbdata[e].Tags.split(",")[i] +
+      "</p>";
   }
 
-  // fetch("server.php?getcomments=" + sessionStorage.getItem("currentpost"))
-  //   .then((response) => {
-  //     return response.json();
-  //   })
-  //   .then((data) => {
-  //     console.log("comments");
-  //     console.log(data);
-  //     // for (let i = 0; i < data.length; i++) {
-  //     //   console.log(i);
-  //     // }
-  //   })
-  //   .then((error) => {
-  //     console.error(error);
-  //   });
   fetch("server.php?getcomments=" + sessionStorage.getItem("currentpost"))
     .then((response) => {
       return response.json();

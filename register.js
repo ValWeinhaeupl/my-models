@@ -39,7 +39,7 @@ fetch("server.php", {
     body: formData,
   })
     .then((response) => {
-        setTimeout(() => {
+        //setTimeout(() => {
             if(response.json()){
                 let data = response;
                 console.log(data);
@@ -54,7 +54,7 @@ fetch("server.php", {
                 console.log("nein");
             }
 
-        }, 3000)
+        //}, 3000)
         
       
     })
@@ -71,7 +71,32 @@ fetch("server.php", {
 
 
 function login(){
-
+    let email_username = document.getElementById("username").value;
+    //direkt gehasht, um passwort nicht an server zu schicken
+    let password = md5(document.getElementById("password").value);
+    let logindata = {
+        "email_username": email_username,
+        "password": password
+    }
+    fetch("server.php?login="+ JSON.stringify(logindata))
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            if(data == true){
+                //nicht fertig
+                localStorage.setItem("login", email_username);
+                location.href="index.php";
+            }else if(data != false){
+                localStorage.setItem("login", data);
+                location.href="index.php";
+            }else if(data == false){
+                console.log(data);
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        })
 }
 
 function logout(){
