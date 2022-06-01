@@ -3,6 +3,9 @@ let password = document.getElementById("password").value;
 let password2 = document.getElementById("password2").value;
 
 function register() {
+  document.getElementById("register").disabled = "disabled";
+  document.getElementById("loading").style.opacity = "100%";
+
   username = document.getElementById("username").value;
   password = document.getElementById("password").value;
   password2 = document.getElementById("password2").value;
@@ -36,32 +39,36 @@ function register() {
       body: formData,
     })
       .then((response) => {
-        //setTimeout(() => {
-
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        if(data){
+        document.getElementById("register").disable = true;
+        setTimeout(() => {
+          console.log(data);
+          if (data) {
             console.log(data);
-                if(data){
-                    console.log("yallah");
-                    localStorage.setItem("login", username);
-                    location.href="index.php";
-                }else{
-                    console.log("error");
-                document.getElementsByTagName("form") += "<p>Benutzer existiert bereits!</p>";
-                }
-        }else{
+
+            console.log("yallah");
+            localStorage.setItem("login", username);
+            location.href = "index.php";
+          } else {
+            document.getElementById("loading").style.opacity = "0%";
+            document.getElementById("fehler").innerHTML =
+              "Username already exists";
+            document.getElementById("register").disabled = "false";
             console.log("nein");
-        }
+          }
+        }, 3000);
       })
       .catch((error) => {
         check = false;
         console.error(error);
       });
   } else {
-    console.log("bruh");
+    document.getElementById("loading").style.opacity = "0%";
+    document.getElementById("fehler").innerHTML =
+      "Please enter a valid username and password";
+    document.getElementById("register").disabled = "false";
   }
 }
 

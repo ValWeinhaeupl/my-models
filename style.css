@@ -114,6 +114,15 @@ p {
   border-style: solid;
 }
 
+#loading {
+  width: 5vw;
+  opacity: 0%;
+}
+
+#fehler {
+  color: red;
+}
+
 #loginbox input[type="text"],
 #loginbox input[type="password"] {
   height: 60%;

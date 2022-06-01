@@ -13,7 +13,7 @@
 <body>
     <script>
         function switchregister(){
-            document.getElementById("loginbox").innerHTML = '<p>Username/password</p><input type="text" id="username"><p>Password</p><input type="password" id="password"><p>Repeat Password</p><input type="password" id="password2"><p>E-mail</p><input type="text" id="email"><p>Profilepicture</p><input type="file" name="profilbild" id="profilbild"><button onclick="register()" id="register">Register</button>';
+            document.getElementById("loginbox").innerHTML = '<p>Username/password</p><input type="text" id="username"><p>Password</p><input type="password" id="password"><p>Repeat Password</p><input type="password" id="password2"><p>E-mail</p><input type="text" id="email"><p>Profilepicture</p><input type="file" name="profilbild" id="profilbild"><button onclick="register()" id="register">Register</button><img src="public/icons/loading.gif" id="loading">';
         }
         function switchlogin(){
             document.getElementById("loginbox").innerHTML = '<p>Username</p><input type="text" id="username"><p>Password</p><input type="password" id="password"><button onclick="login()" id="register">Login</button>';
@@ -37,6 +37,8 @@
         <p>E-mail</p><input type="text" id="email">
         <p>Profilepicture</p><input type="file" name="profilbild" id="profilbild">
         <button onclick="register()" id="register">Register</button>
+        <img src='public/icons/loading.gif' id='loading'>
+        <p id="fehler"></p>
         </div>
     
         

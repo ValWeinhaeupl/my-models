@@ -150,7 +150,6 @@ function comment() {
 }
 
 function viewuser(user) {
-  document.getElementById("userdata").style.display = "flex";
   console.log(user);
   //leave();
   fetch("server.php?getuserposts=" + user)
@@ -158,10 +157,20 @@ function viewuser(user) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
-      //wichtig
-      leave();
-      loadposts(data);
+      if (data.length == 0) {
+        document.getElementById("userdata").style.display = "none";
+        console.log(document.getElementById("container"));
+        leave();
+        container.style.height = "50vh";
+        container.innerHTML = "";
+        container.innerHTML +=
+          "<div id='nopostwrapper'><p id='noposts'>User doesn't have any posts :(</p><a href='index.php' id='goback'>See More Posts</a></div>";
+      } else {
+        superdata = data;
+        document.getElementById("userdata").style.display = "flex";
+        leave();
+        loadposts(data);
+      }
     })
     .catch((error) => {
       console.error(error);
