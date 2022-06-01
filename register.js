@@ -18,21 +18,6 @@ function register() {
   formData.append("email", email);
   formData.append("profilbild", profilepicture);
 
-  //in json senden für bessere wartung
-  // if(username.length > 3 && password == password2){
-  //     fetch("server.php?register=" + JSON.stringify(registerdata))
-  //         .then((response) => {
-  //             return response.json();
-  //         })
-  //         .then((data) => {
-
-  //         })
-  //         .catch((error) => {
-  //             console.error(error);
-  //         })
-  // }else{
-  //     console.log("password fail");
-  // }
   if (username.length > 3 && password == password2) {
     fetch("server.php", {
       method: "post",
@@ -42,7 +27,6 @@ function register() {
         return response.json();
       })
       .then((data) => {
-        document.getElementById("register").disable = true;
         setTimeout(() => {
           console.log(data);
           if (data) {
@@ -55,9 +39,9 @@ function register() {
             document.getElementById("loading").style.opacity = "0%";
             document.getElementById("fehler").innerHTML =
               "Username already exists";
-            document.getElementById("register").disabled = "false";
             console.log("nein");
           }
+          document.getElementById("register").removeAttribute("disabled");
         }, 3000);
       })
       .catch((error) => {
@@ -68,7 +52,7 @@ function register() {
     document.getElementById("loading").style.opacity = "0%";
     document.getElementById("fehler").innerHTML =
       "Please enter a valid username and password";
-    document.getElementById("register").disabled = "false";
+    document.getElementById("register").removeAttribute("disabled");
   }
 }
 
@@ -93,7 +77,9 @@ function login() {
         localStorage.setItem("login", data);
         location.href = "index.php";
       } else if (data == false) {
-        console.log(data);
+        //console.log("test");
+        document.getElementById("fehler").innerHTML =
+          "Please enter valid userdata!";
       }
     })
     .catch((error) => {

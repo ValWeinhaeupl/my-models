@@ -73,30 +73,7 @@
         
     }
 
-    // if(isset($_GET["register"])){
-    //     $logindata = json_decode($_GET["register"]);
-    //     if($conn->connect_error){
-    //      die("Connection failed: " . $conn->connection_error);
-    //     }
 
-    //         $insert = "insert into benutzer (username, password, email) values('" . $_POST["username"] . "', md5('" . $_POST["password"] ."'), '". json_encode($_POST["email"]) ."');";
-            
-    //         $conn->query($insert);
-
-    //         $insertfeed = "insert into feed (username) values('" . $_POST["username"] ."');";
-    //         $conn->query($insertfeed);
-
-    //         $getfeedno = "select FeedNr from feed where username = '" . $_POST["username"] . "';";
-    //         $feedno = $conn->query($getfeedno);
-    //         $tempfeednr = null;
-    //         while($row = $feedno->fetch_assoc()){
-    //             $tempfeednr = $row["FeedNr"];
-    //         }
-            
-    //         $insertfeedno = "update benutzer set FeedNr = " . $tempfeednr. " where username = '" . $_POST["username"] . "';"; 
-    //         $conn->query($insertfeedno);
-    //         echo json_encode(true);
-    // }
 
   
 
@@ -199,7 +176,7 @@
             }
         }
 
-        $data = json_decode($_GET["login"]);
+        //$data = json_decode($_GET["login"]);
         $selectusername = "select * from benutzer where email = '" . $data->email_username . "';";
         $rs = $conn->query($selectusername);
         while($row = $rs->fetch_assoc()){
@@ -211,14 +188,14 @@
                         echo json_encode($row["username"]);
                     }
                 }else{
-                    echo json_encode(true);
+                    //echo json_encode(true);
                 }
-                
             }else{
                 echo json_encode(false);
             }
         }
 
+        //echo json_encode(false);
         
     }
 
