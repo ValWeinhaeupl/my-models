@@ -1,22 +1,4 @@
 <?php
-    // if(isset($_POST['send'])){
-    //     $eingabe = array();
-    //     $error = array();
-
-    //     if(isset($_POST['username']) && strlen(trim($_POST['username'])) && !is_array($_POST['username'])){
-    //         $eingabe['vorname'] = htmlspecialchars(trim($_POST['username']));
-    //         echo json_encode($eingabe['vorname']);
-    //     }else{
-    //         $error['username'] = "username episch";
-    //     }
-
-    // }
-
-    //check nach user auf datenbank
-    //$value = ;
-
-    
-
     $_db_host = "localhost";
     $_db_datenbank = "my-models";
     $_db_username = "mymodel_user";
@@ -47,18 +29,7 @@
             //catch, return false
             $conn->query($insert);
 
-            $insertfeed = "insert into feed (username) values('" . $_POST["username"] ."');";
-            $conn->query($insertfeed);
-
-            $getfeedno = "select FeedNr from feed where username = '" . $_POST["username"] . "';";
-            $feedno = $conn->query($getfeedno);
-            $tempfeednr = null;
-            while($row = $feedno->fetch_assoc()){
-                $tempfeednr = $row["FeedNr"];
-            }
             
-            $insertfeedno = "update benutzer set FeedNr = " . $tempfeednr. " where username = '" . $_POST["username"] . "';"; 
-            $conn->query($insertfeedno);
 
             $pathpb = "remotefiles/profile-pictures/" . $_POST["username"] . ".png";
             move_uploaded_file($_FILES["profilbild"]["tmp_name"], $pathpb);
