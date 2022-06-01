@@ -41,9 +41,16 @@ if (!location.href.includes("user.php")) {
     .then((data) => {
       console.log(data);
       //wichtig
-      superdata = data;
-      document.getElementById("userdata").style.display = "flex";
-      loadposts(data);
+      if (data.length == 0) {
+        console.log(document.getElementById("container"));
+        container.style.height = "50vh";
+        container.innerHTML +=
+          "<div id='nopostwrapper'><p id='noposts'>User doesn't have any posts :(</p><a href='index.php' id='goback'>See More Posts</a></div>";
+      } else {
+        superdata = data;
+        document.getElementById("userdata").style.display = "flex";
+        loadposts(data);
+      }
     })
     .catch((error) => {
       console.error(error);
