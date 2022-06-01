@@ -31,10 +31,20 @@
     //profilbild
 
     if(isset($_POST["username"])){
-        echo "test";
+        //echo "test";
 
-        $insert = "insert into benutzer (username, password, email) values('" . $_POST["username"] . "', md5('" . $_POST["password"] ."'), '". $_POST["email"] ."');";
-            
+        $getusers = "select username from benutzer;";
+        $rsusers = $conn->query($getusers);
+        $check = true;
+        while($row = $rsusers->fetch_assoc()){
+            if($row["username"] == $_POST["username"]){
+                $check = false;
+            }
+        }
+
+        if($check == true){
+            $insert = "insert into benutzer (username, password, email) values('" . $_POST["username"] . "', md5('" . $_POST["password"] ."'), '". $_POST["email"] ."');";
+            //catch, return false
             $conn->query($insert);
 
             $insertfeed = "insert into feed (username) values('" . $_POST["username"] ."');";
@@ -56,7 +66,11 @@
             $updatepath = "update benutzer set profilepicture = '" . $pathpb . "' where username = '" . $_POST["username"] . "';";
             $conn->query($updatepath);
 
-            echo  json_encode(true);
+            echo json_encode(true);
+        }else{
+            echo json_encode(false);
+        }
+        
     }
 
     // if(isset($_GET["register"])){

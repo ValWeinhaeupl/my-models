@@ -16,17 +16,20 @@
             document.getElementById("loginbox").innerHTML = '<p>Username/password</p><input type="text" id="username"><p>Password</p><input type="password" id="password"><p>Repeat Password</p><input type="password" id="password2"><p>E-mail</p><input type="text" id="email"><p>Profilepicture</p><input type="file" name="profilbild" id="profilbild"><button onclick="register()" id="register">Register</button>';
         }
         function switchlogin(){
-            document.getElementById("loginbox").innerHTML = '<p>Username</p><input type="text" id="username"><p>Password</p><input type="password" id="password"><button onclick="login()">Login</button>';
+            document.getElementById("loginbox").innerHTML = '<p>Username</p><input type="text" id="username"><p>Password</p><input type="password" id="password"><button onclick="login()" id="register">Login</button>';
         }
     </script>
 <?php
         include "public/php_bausteine/header.php";
     ?>
     <div id="logincontainer">
-        <button onclick="switchregister()">Register</button>
-        <button onclick="switchlogin()">Login</button>
+        
     <h2>Register</h2>
-    
+    <div id="switchbuttons">
+    <p onclick="switchregister()" class="switchlogin">Register</p>
+        <p onclick="switchlogin()" class="switchlogin">Login</p>
+    </div>
+
         <div id="loginbox">
         <p>Username</p><input type="text" id="username">
         <p>Password</p><input type="password" id="password">
